@@ -11,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Service {
@@ -36,15 +37,15 @@ public interface Service {
     );
     @DELETE("/marchio/delete/{id}")
     Call<Void> deleteBrand(
-            @Query("id") int id
+            @Path("id") int id
     );
     @POST("/marchio/add")
     Call<Brand> createBrand(
             @Body Brand requestData
     );
-    @POST("/addPuntoVenditaToMarchio/{id_brand}")
+    @POST("/punto_vendita/addPuntoVenditaToMarchio/{id_brand}")
     Call<Void> createStore(
-            @Query("id_brand") int ind_brand,
+            @Path("id_brand") int ind_brand,
             @Body Store requestData
     );
 }

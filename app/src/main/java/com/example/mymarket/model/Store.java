@@ -3,7 +3,7 @@ package com.example.mymarket.model;
 import java.util.List;
 
 public class Store {
-    private int id,CAP;
+    private int id,cap;
     private String citta,civico,indirizzo;
     private List<Prodotto> prodotti;
     private Brand brand;
@@ -23,11 +23,11 @@ public class Store {
     }
 
     public int getCAP() {
-        return CAP;
+        return cap;
     }
 
-    public void setCAP(int CAP) {
-        this.CAP = CAP;
+    public void setCAP(int cap) {
+        this.cap = cap;
     }
 
     public String getCitta() {

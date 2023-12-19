@@ -1,5 +1,7 @@
 package com.example.mymarket.ui.login;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mymarket.R;
 import com.example.mymarket.RetrofitInstance;
@@ -53,7 +56,13 @@ public class AddStoreFragment extends Fragment {
                 newStore.setCivico(newCivico);
                 RetrofitInstance retrofitInstance = new RetrofitInstance();
                 retrofitInstance.addStore(brandId, newStore);
-                //scrivere retrofit e salvare a db
+                Toast.makeText(getContext(), "Store aggiunto correttamente", Toast.LENGTH_SHORT).show();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, new BrandsFragment());
+                //fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
 

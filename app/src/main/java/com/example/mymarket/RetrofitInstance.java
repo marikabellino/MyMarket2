@@ -167,11 +167,11 @@ public class RetrofitInstance {
                         .build();
         Service retrofitService = retrofit.create(Service.class);
         Call<Void> call = retrofitService.createStore(id_brand,s);
-        Log.e("chiamata", call.request().url().toString());
+        Log.e("chiamatamine", call.request().url().toString());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.e("myLog", "brand aggiunto correttamente");
+                Log.e("myLog", "store aggiunto correttamente");
             }
 
             @Override
