@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.mymarket.adapter.BrandsAdapter;
 import com.example.mymarket.ui.login.LoginFragment;
 import com.example.mymarket.ui.login.OnUserTypeSelectedListener;
 import com.example.mymarket.ui.login.SwitchFragment;

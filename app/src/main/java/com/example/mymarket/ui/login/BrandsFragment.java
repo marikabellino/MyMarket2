@@ -38,6 +38,7 @@ public class BrandsFragment extends Fragment implements DataCallback {
         return new BrandsFragment();
     }
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
