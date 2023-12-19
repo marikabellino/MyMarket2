@@ -81,3 +81,4 @@ public class BrandsFragment extends Fragment implements DataCallback {
         Log.e("errore","ciao: " + t.getMessage());
     }
 }
+

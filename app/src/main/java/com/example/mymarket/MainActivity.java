@@ -20,6 +20,7 @@ import com.example.mymarket.ui.login.SwitchFragment;
 public class MainActivity extends AppCompatActivity implements OnUserTypeSelectedListener {
 //ciao
     @Override
+    //ciao
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

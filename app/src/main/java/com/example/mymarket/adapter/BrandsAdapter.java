@@ -24,12 +24,14 @@ import java.util.List;
 
 public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsViewHolder> {
     private List<Brand> brandList;
+
     private Context context;
 
     public BrandsAdapter(List<Brand> brandList, Context context, FragmentManager fragmentManager) {
         this.brandList = brandList;
         this.context = context;
         this.fragmentManager = fragmentManager;
+
     }
 
     private FragmentManager fragmentManager;

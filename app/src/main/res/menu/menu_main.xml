@@ -12,11 +12,6 @@
             />
 
         <item
-            android:id="@+id/menu_add_store"
-            android:title="Aggiungi Store"
-            />
-
-        <item
             android:id="@+id/menu_stores"
             android:title="Stores"
             />
