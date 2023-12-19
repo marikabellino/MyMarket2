@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnUserTypeSelecte
         transaction.replace(R.id.fragment_container, loginFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-        Log.e("marika", "onUserTypeSelected - isUser: " + isUser);
+        Log.e("ciao", "onUserTypeSelected - isUser: " + isUser);
 
     }
 }
