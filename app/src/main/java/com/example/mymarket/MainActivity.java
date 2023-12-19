@@ -18,7 +18,7 @@ import com.example.mymarket.ui.login.OnUserTypeSelectedListener;
 import com.example.mymarket.ui.login.SwitchFragment;
 
 public class MainActivity extends AppCompatActivity implements OnUserTypeSelectedListener {
-
+//ciao
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
