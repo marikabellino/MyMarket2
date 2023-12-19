@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lime"
+    tools:context=".RegisterFragment"
+    android:id="@+id/register_frag">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="157dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/register_mail"
+            android:layout_width="311dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="text"
+            android:textColorHint="@color/white1"
+            android:textColor="@color/white1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_surname" />
+
+        <EditText
+            android:id="@+id/register_pwd"
+            android:layout_width="311dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:textColor="@color/white1"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_mail" />
+
+        <EditText
+            android:id="@+id/register_pwdConfirm"
+            android:layout_width="311dp"
+            android:layout_height="42dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textColor="@color/white1"
+            android:textColorHint="@color/white1"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_pwd"
+            app:layout_constraintVertical_bias="0.852" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="311dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/register_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <RadioButton
+                android:id="@+id/user_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sono un cliente"
+                android:textColor="@color/white1"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/admin_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sono un admin"
+                android:textColor="@color/white1" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/register_surname"
+            android:layout_width="311dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/white1"
+            android:ems="10"
+            android:textColorHint="@color/white1"
+            android:inputType="text"
+            android:textColor="@color/white1"
+            android:hint="Cognome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_name" />
+
+        <EditText
+            android:id="@+id/register_name"
+            android:layout_width="311dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="@color/white1"
+            android:ems="10"
+            android:textColor="@color/white1"
+            android:inputType="text"
+            android:hint="Nome"
+            android:textColorHint="@color/white1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="330dp"
+            android:layout_height="63dp"
+            android:layout_marginBottom="52dp"
+            android:backgroundTint="@color/white1"
+            android:text="Registrati"
+            android:textColor="@color/lime"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

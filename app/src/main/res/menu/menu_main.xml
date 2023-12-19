@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/menu_brand"
+            android:title="Brand"
+            />
+
+        <item
+            android:id="@+id/menu_add_brand"
+            android:title="Aggiungi Brand"
+            />
+
+        <item
+            android:id="@+id/menu_add_store"
+            android:title="Aggiungi Store"
+            />
+
+        <item
+            android:id="@+id/menu_stores"
+            android:title="Stores"
+            />
+
+</menu>
