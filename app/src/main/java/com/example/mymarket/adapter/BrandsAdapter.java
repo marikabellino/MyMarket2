@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -69,6 +70,11 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
                 Log.e("deleteBtn", " "+brand.getId());
                 RetrofitInstance retrofitInstance= new RetrofitInstance();
                 retrofitInstance.deleteBrand(brand.getId());
+
+                int position = holder.getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    removeItem(position);
+                }
             }
         });
     }
@@ -77,12 +83,18 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
     public int getItemCount() {
         return brandList.size();
     }
+    public void removeItem(int position) {
+        brandList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+    }
 
     static class BrandsViewHolder extends RecyclerView.ViewHolder {
         TextView brandName;
 
         Button addbtn;
         Button deleteBtn;
+        CardView brandCard;
 
         public BrandsViewHolder(@NonNull View itemView) {
             super(itemView);
