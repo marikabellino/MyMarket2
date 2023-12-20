@@ -80,14 +80,12 @@ public class AddStoreFragment extends Fragment implements SingleStoreCallBack {
                     Log.e("errorone", "errorone: " + t.getMessage());
                 }
             });
-
         }
 
         int brandId = b.getInt("brand");
         insertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Log.e("ciao","ciaone cliccato");
                 if(b.getInt("updatedStoreId") != 0) {
 
@@ -98,17 +96,35 @@ public class AddStoreFragment extends Fragment implements SingleStoreCallBack {
                     String newAddress = address.getText().toString();
                     String newCivico = civico.getText().toString();
 
-                    Log.e("oggetto","con oggetto" + newcity + " " + newCap + " " + newAddress + " " + newCivico);
-
+                    Log.e("oggetto","con oggetto" + newcity + " " + newCap + " " + newAddress + " " + newCivico + " " + store.getId());
 
                     store.setCAP(newCap);
                     store.setCitta(newcity);
                     store.setIndirizzo(newAddress);
                     store.setCivico(newCivico);
 
-                    Log.e("ciao","ciao" + store.toString());
-                    RetrofitInstance retrofitInstance = new RetrofitInstance();
-                    retrofitInstance.updateStore(store.getId(), store);
+                    Retrofit retrofit =
+                            new Retrofit.Builder()
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .baseUrl(baseUrl)
+                                    .build();
+                    Service retrofitService = retrofit.create(Service.class);
+                    Call<Void> call = retrofitService.updateStore(store.getId(), store);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Void> call,
+                                               @NonNull Response<Void> response) {
+                            if (response.isSuccessful())
+                            {
+                                Log.e("oggetto","ciaone si " + store.toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                            Log.e("oggetto","ciaone no");
+                        }
+                    });
                     Toast.makeText(getContext(), "Store modificato correttamente", Toast.LENGTH_SHORT).show();
                     FragmentManager fragmentManager = getParentFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

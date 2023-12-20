@@ -95,7 +95,6 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
                  ft.commit();
             }
         });
-
     }
 
     @Override

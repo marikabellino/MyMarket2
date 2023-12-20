@@ -29,11 +29,13 @@ import java.util.List;
 public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresViewHolder> {
     private List<Store> storeList;
     private Context context;
+    private int id_brand;
 
-    public StoresAdapter(List<Store> storeList, Context context, FragmentManager fragmentManager) {
+    public StoresAdapter(List<Store> storeList, Context context, FragmentManager fragmentManager, int id_brand) {
         this.storeList = storeList;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.id_brand = id_brand;
     }
 
     private FragmentManager fragmentManager;
@@ -84,6 +86,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
             public void onClick(View v) {
                 Bundle b = new Bundle();
                 b.putInt("updatedStoreId", store.getId());
+                b.putInt("brand_id",id_brand);
 
                 AddStoreFragment addStoreFragment = new AddStoreFragment();
                 addStoreFragment.setArguments(b);

@@ -55,7 +55,7 @@ public class StoresList extends Fragment implements StoreCallBack {
         recycler = binding.storesRecycler;
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         storeList = new ArrayList<>();
-        storesAdapter = new StoresAdapter(storeList, requireContext(), getParentFragmentManager());
+        storesAdapter = new StoresAdapter(storeList, requireContext(), getParentFragmentManager(), selectedBrand);
 
         recycler.setAdapter(storesAdapter);
         retrofitInstance = new RetrofitInstance();

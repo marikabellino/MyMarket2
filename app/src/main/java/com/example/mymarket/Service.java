@@ -60,7 +60,7 @@ public interface Service {
             @Path("id_brand") int ind_brand,
             @Body Store requestData
     );
-    @PUT("/updatePuntoVendita/{id}")
+    @PUT("/punto_vendita/updatePuntoVendita/{id}")
     Call<Void> updateStore(
             @Path("id") int id,
             @Body Store requestData

@@ -279,7 +279,7 @@ public class RetrofitInstance {
                                    @NonNull Response<Void> response) {
                 if (response.isSuccessful())
                 {
-                    Log.e("ciao","ciaone si");
+                    Log.e("oggetto","ciaone si " + updatedStore.toString());
                 }
             }
 
