@@ -241,6 +241,27 @@ public class RetrofitInstance {
             }
 
         });
-
     }
+
+    public void deleteStore(int id) {
+        Retrofit retrofit =
+                new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(baseUrl)
+                        .build();
+        Service retrofitService = retrofit.create(Service.class);
+        Call<Void> call = retrofitService.deleteStore(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call,
+                                   @NonNull Response<Void> response) {
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
 }

@@ -49,8 +49,8 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
         Log.e("giov","sono adapter");
         Store store = storeList.get(position);
         holder.brandName.setText(store.getIndirizzo());
-        /*
-        holder.addbtn.setOnClickListener(new View.OnClickListener() {
+
+        /*holder.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -64,12 +64,12 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
             }
         });*/
 
-        /*holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("deleteBtn", " "+brand.getId());
+                Log.e("deleteBtn", " " + store.getId());
                 RetrofitInstance retrofitInstance= new RetrofitInstance();
-                retrofitInstance.deleteBrand(brand.getId());
+                retrofitInstance.deleteStore(store.getId());
 
                 int position = holder.getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
@@ -77,6 +77,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                 }
             }
         });
+         /*
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +115,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
             super(itemView);
             brandName = itemView.findViewById(R.id.card_title2);
             indirizzo = itemView.findViewById(R.id.indirizzo2);
+            deleteBtn = itemView.findViewById(R.id.deletStoreBtn);
            // card = itemView.findViewById(R.id.brand_card);
         }
     }
