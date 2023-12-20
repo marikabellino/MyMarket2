@@ -1,8 +1,9 @@
 package com.example.mymarket.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Store {
+public class Store implements Serializable {
     private int id,cap;
     private String citta,civico,indirizzo;
     private List<Prodotto> prodotti;

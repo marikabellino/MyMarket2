@@ -41,31 +41,57 @@ public class AddStoreFragment extends Fragment {
         EditText civico = v.findViewById(R.id.store_num);
         Button insertBtn = v.findViewById(R.id.insertStore);
         Bundle b = getArguments();
-        int brandId = b.getInt("brand");
-        insertBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newcity = city.getText().toString();
-                int newCap = Integer.parseInt(cap.getText().toString());
-                String newAddress = address.getText().toString();
-                String newCivico = civico.getText().toString();
-                Store newStore = new Store();
-                newStore.setCAP(newCap);
-                newStore.setCitta(newcity);
-                newStore.setIndirizzo(newAddress);
-                newStore.setCivico(newCivico);
-                RetrofitInstance retrofitInstance = new RetrofitInstance();
-                retrofitInstance.addStore(brandId, newStore);
-                Toast.makeText(getContext(), "Store aggiunto correttamente", Toast.LENGTH_SHORT).show();
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new BrandsFragment());
-                //fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
 
-            }
-        });
+        if(b.getSerializable("updatedStore") != null) {
+            Store updatedStore = (Store) b.getSerializable("updatedStore");
+            insertBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String newcity = city.getText().toString();
+                    int newCap = Integer.parseInt(cap.getText().toString());
+                    String newAddress = address.getText().toString();
+                    String newCivico = civico.getText().toString();
+                    Store newStore = new Store();
+                    newStore.setCAP(newCap);
+                    newStore.setCitta(newcity);
+                    newStore.setIndirizzo(newAddress);
+                    newStore.setCivico(newCivico);
+                    RetrofitInstance retrofitInstance = new RetrofitInstance();
+                    retrofitInstance.updateStore(updatedStore.getId(), updatedStore);
+                    Toast.makeText(getContext(), "Store modificato correttamente", Toast.LENGTH_SHORT).show();
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, new BrandsFragment());
+                    fragmentTransaction.commit();
+                }
+            });
 
+        } else {
+            int brandId = b.getInt("brand");
+            insertBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String newcity = city.getText().toString();
+                    int newCap = Integer.parseInt(cap.getText().toString());
+                    String newAddress = address.getText().toString();
+                    String newCivico = civico.getText().toString();
+                    Store newStore = new Store();
+                    newStore.setCAP(newCap);
+                    newStore.setCitta(newcity);
+                    newStore.setIndirizzo(newAddress);
+                    newStore.setCivico(newCivico);
+                    RetrofitInstance retrofitInstance = new RetrofitInstance();
+                    retrofitInstance.addStore(brandId, newStore);
+                    Toast.makeText(getContext(), "Store aggiunto correttamente", Toast.LENGTH_SHORT).show();
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, new BrandsFragment());
+                    //fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+                }
+            });
+        }
         return v;
     }
 

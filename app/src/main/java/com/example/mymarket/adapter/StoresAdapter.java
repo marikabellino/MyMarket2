@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -77,21 +78,21 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                 }
             }
         });
-         /*
-        holder.card.setOnClickListener(new View.OnClickListener() {
+
+        holder.updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
-                b.putSerializable("selectedBrand", brand);
-                StoresList storesList = new StoresList();
-                storesList.setArguments(b);
+                b.putSerializable("updatedStore", store);
+
+                AddStoreFragment addStoreFragment = new AddStoreFragment();
+                addStoreFragment.setArguments(b);
                 FragmentTransaction ft = fragmentManager.beginTransaction();
-                ft.replace(R.id.fragment_container, storesList );
+                ft.replace(R.id.fragment_container, addStoreFragment );
                 ft.addToBackStack(null);
                 ft.commit();
             }
-        });*/
-
+        });
     }
 
     @Override
@@ -107,8 +108,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
     static class StoresViewHolder extends RecyclerView.ViewHolder {
         TextView brandName;
         TextView indirizzo;
-        CardView card;
-        Button addbtn;
+        ImageButton updatebtn;
         Button deleteBtn;
 
         public StoresViewHolder(@NonNull View itemView) {
@@ -116,7 +116,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
             brandName = itemView.findViewById(R.id.card_title2);
             indirizzo = itemView.findViewById(R.id.indirizzo2);
             deleteBtn = itemView.findViewById(R.id.deletStoreBtn);
-           // card = itemView.findViewById(R.id.brand_card);
+            updatebtn = itemView.findViewById(R.id.editStoreBtn);
         }
     }
 }
