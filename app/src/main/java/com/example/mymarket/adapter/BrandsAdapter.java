@@ -84,7 +84,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
             @Override
             public void onClick(View v) {
                  Bundle b = new Bundle();
-                 b.putSerializable("selectedBrand", brand);
+                 b.putInt("selectedBrand", brand.getId());
                  Log.e("cliccato", " " + brand.getId());
 
                  StoresList storesList = new StoresList();

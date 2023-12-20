@@ -48,9 +48,9 @@ public class StoresList extends Fragment implements StoreCallBack {
         View root = binding.getRoot();
 
         Bundle b = getArguments();
-        Brand selectedBrand = b.getSerializable("selectedBrand", Brand.class);
+        int selectedBrand = b.getInt("selectedBrand",2);
 
-        Log.e("myBrandLog", selectedBrand.getId()+"");
+        Log.e("myBrandLog", selectedBrand + " ");
 
         recycler = binding.storesRecycler;
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -59,7 +59,7 @@ public class StoresList extends Fragment implements StoreCallBack {
 
         recycler.setAdapter(storesAdapter);
         retrofitInstance = new RetrofitInstance();
-        retrofitInstance.readStores(storesAdapter, this);
+        retrofitInstance.readStores(storesAdapter, this, selectedBrand);
         Log.e("ciao","sono nel brandsfragment");
 
         return root;

@@ -27,10 +27,10 @@ public class RetrofitInstance {
     private List<Store> stores;
     private User user;
 
-    //String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
+    String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
     //String baseUrl = "https://2796-151-12-133-222.ngrok-free.app";
    // String baseUrl = "https://0ee6-151-12-133-222.ngrok-free.app";
-    String baseUrl = "https://7f83-151-12-133-222.ngrok-free.app";
+    //String baseUrl = "https://7f83-151-12-133-222.ngrok-free.app";
 
     public void readUsers(UserAdapter userAdapter) {
 
@@ -207,14 +207,14 @@ public class RetrofitInstance {
         });
     }
 
-    public void readStores(StoresAdapter storesAdapter, StoreCallBack callback) {
+    public void readStores(StoresAdapter storesAdapter, StoreCallBack callback, int id_brand) {
         Retrofit retrofit =
                 new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
                         .baseUrl(baseUrl)
                         .build();
         Service retrofitService = retrofit.create(Service.class);
-        Call<List<Store>> call = retrofitService.getPuntiVenditaToMarchio(1);
+        Call<List<Store>> call = retrofitService.getPuntiVenditaToMarchio(id_brand);
         call.enqueue(new Callback<List<Store>>() {
             @Override
             public void onResponse(Call<List<Store>> call,
