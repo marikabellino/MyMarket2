@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mymarket.AddBrandFragment;
 import com.example.mymarket.R;
 import com.example.mymarket.RetrofitInstance;
 import com.example.mymarket.data.StoresList;
@@ -95,6 +97,23 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
                  ft.commit();
             }
         });
+
+        holder.updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("brandbutton","sono cliccato");
+                Bundle b = new Bundle();
+                b.putInt("selectedBrand", brand.getId());
+                Log.e("cliccato", " " + brand.getId());
+
+                AddBrandFragment addBrandFragment = new AddBrandFragment();
+                addBrandFragment.setArguments(b);
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.fragment_container, addBrandFragment );
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
     }
 
     @Override
@@ -112,6 +131,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
         CardView card;
         Button addbtn;
         Button deleteBtn;
+        ImageButton updateBtn;
 
         public BrandsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -119,6 +139,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
             addbtn = itemView.findViewById(R.id.add_btn);
             deleteBtn = itemView.findViewById(R.id.deleteBrandBtn);
             card = itemView.findViewById(R.id.brand_card);
+            updateBtn = itemView.findViewById(R.id.editBrandBtn);
         }
     }
 }

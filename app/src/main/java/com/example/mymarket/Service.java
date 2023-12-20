@@ -23,6 +23,10 @@ public interface Service {
     @GET("/marchio/all")
     Call<List<Brand>> getBrands(
     );
+    @GET("/marchio/one/{id}")
+    Call<Brand> getSingleBrand(
+            @Path("id") int id
+    );
     @GET("/marchio/{id}/punti_vendita")
     Call<List<Store>> getPuntiVenditaToMarchio(
             @Path("id") int id_marchio
@@ -64,5 +68,10 @@ public interface Service {
     Call<Void> updateStore(
             @Path("id") int id,
             @Body Store requestData
+    );
+    @PUT("/marchio/update/{id}")
+    Call<Void> editBrand(
+            @Path("id") int id,
+            @Body Brand requestData
     );
 }
