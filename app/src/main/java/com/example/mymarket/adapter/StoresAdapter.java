@@ -83,7 +83,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
-                b.putSerializable("updatedStore", store);
+                b.putInt("updatedStoreId", store.getId());
 
                 AddStoreFragment addStoreFragment = new AddStoreFragment();
                 addStoreFragment.setArguments(b);

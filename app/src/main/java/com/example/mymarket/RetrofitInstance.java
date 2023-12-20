@@ -25,12 +25,13 @@ public class RetrofitInstance {
     private List<User> users;
     private List<Brand> brands;
     private List<Store> stores;
+    private Store singleStore;
     private User user;
 
-    String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
+    //String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
     //String baseUrl = "https://2796-151-12-133-222.ngrok-free.app";
    // String baseUrl = "https://0ee6-151-12-133-222.ngrok-free.app";
-    //String baseUrl = "https://7f83-151-12-133-222.ngrok-free.app";
+    String baseUrl = "https://7f83-151-12-133-222.ngrok-free.app";
 
     public void readUsers(UserAdapter userAdapter) {
 
@@ -276,10 +277,39 @@ public class RetrofitInstance {
             @Override
             public void onResponse(@NonNull Call<Void> call,
                                    @NonNull Response<Void> response) {
+                if (response.isSuccessful())
+                {
+                    Log.e("ciao","ciaone si");
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e("ciao","ciaone no");
+            }
+        });
+    }
+
+    public void singleStore(int id, SingleStoreCallBack singleStoreCallBack) {
+        Retrofit retrofit =
+                new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(baseUrl)
+                        .build();
+        Service retrofitService = retrofit.create(Service.class);
+        Call<Store> call = retrofitService.getSingleStore(id);
+        call.enqueue(new Callback<Store>() {
+            @Override
+            public void onResponse(@NonNull Call<Store> call,
+                                   @NonNull Response<Store> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    singleStore = response.body();
+                    Log.e("singlestore",singleStore.toString());
+                    singleStoreCallBack.onSingleStoreDataReceived(singleStore);
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<Store> call, @NonNull Throwable t) {
 
             }
         });

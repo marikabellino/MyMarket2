@@ -27,7 +27,10 @@ public interface Service {
     Call<List<Store>> getPuntiVenditaToMarchio(
             @Path("id") int id_marchio
     );
-
+    @GET("/punto_vendita/one/{id}")
+    Call<Store> getSingleStore(
+            @Path("id") int id
+    );
     @GET("/clienti/one/{email}")
     Call<User> singleUser(
     );
