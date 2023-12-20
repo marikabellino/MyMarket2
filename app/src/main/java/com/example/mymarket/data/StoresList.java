@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,13 +16,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mymarket.R;
+import com.example.mymarket.RetrofitInstance;
+import com.example.mymarket.StoreCallBack;
+import com.example.mymarket.adapter.BrandsAdapter;
+import com.example.mymarket.adapter.StoresAdapter;
+import com.example.mymarket.databinding.FragmentStoresListBinding;
 import com.example.mymarket.model.Brand;
+import com.example.mymarket.model.Store;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class StoresList extends Fragment {
+public class StoresList extends Fragment implements StoreCallBack {
 
     private StoresListViewModel mViewModel;
+    private RecyclerView recycler;
+    private List<Store> storeList;
+    private StoresAdapter storesAdapter;
+    private FragmentStoresListBinding binding;
+    private RetrofitInstance retrofitInstance;
 
     public static StoresList newInstance() {
         return new StoresList();
@@ -29,11 +44,25 @@ public class StoresList extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_stores_list, container, false);
+        binding =  FragmentStoresListBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
         Bundle b = getArguments();
         Brand selectedBrand = b.getSerializable("selectedBrand", Brand.class);
+
         Log.e("myBrandLog", selectedBrand.getId()+"");
-        return v;
+
+        recycler = binding.storesRecycler;
+        recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
+        storeList = new ArrayList<>();
+        storesAdapter = new StoresAdapter(storeList, requireContext(), getParentFragmentManager());
+
+        recycler.setAdapter(storesAdapter);
+        retrofitInstance = new RetrofitInstance();
+        retrofitInstance.readStores(storesAdapter, this);
+        Log.e("ciao","sono nel brandsfragment");
+
+        return root;
     }
 
     @Override
@@ -43,4 +72,15 @@ public class StoresList extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onStoresDataReceived(List<Store> stores) {
+        storeList.addAll(stores);
+        recycler.setAdapter(storesAdapter);
+        Log.e("ciao","sono nel ondataready");
+    }
+
+    @Override
+    public void onStoresDataFailed(Throwable t) {
+
+    }
 }

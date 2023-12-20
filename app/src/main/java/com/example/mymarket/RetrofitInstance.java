@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymarket.adapter.BrandsAdapter;
+import com.example.mymarket.adapter.StoresAdapter;
 import com.example.mymarket.model.Brand;
 import com.example.mymarket.model.Store;
 import com.example.mymarket.model.User;
@@ -23,11 +24,14 @@ public class RetrofitInstance {
 
     private List<User> users;
     private List<Brand> brands;
+    private List<Store> stores;
     private User user;
 
-    String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
+    //String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
     //String baseUrl = "https://2796-151-12-133-222.ngrok-free.app";
    // String baseUrl = "https://0ee6-151-12-133-222.ngrok-free.app";
+    String baseUrl = "https://7f83-151-12-133-222.ngrok-free.app";
+
     public void readUsers(UserAdapter userAdapter) {
 
         Retrofit retrofit =
@@ -87,7 +91,7 @@ public class RetrofitInstance {
             public void onFailure(@NonNull Call<List<Brand>> call, @NonNull Throwable t) {
                 Log.e("failure", "failure: " + t);
                 brands = null;
-                //callback.onUserDataFailed(t);
+                callback.onCustomerDataFailed(t);
             }
 
         });
@@ -201,5 +205,42 @@ public class RetrofitInstance {
 
             }
         });
+    }
+
+    public void readStores(StoresAdapter storesAdapter, StoreCallBack callback) {
+        Retrofit retrofit =
+                new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(baseUrl)
+                        .build();
+        Service retrofitService = retrofit.create(Service.class);
+        Call<List<Store>> call = retrofitService.getPuntiVenditaToMarchio(1);
+        call.enqueue(new Callback<List<Store>>() {
+            @Override
+            public void onResponse(Call<List<Store>> call,
+                                   Response<List<Store>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    stores = response.body();
+                    Log.e("giov",stores.toString());
+                    storesAdapter.notifyDataSetChanged();
+                    if(stores != null)
+                    {
+                        callback.onStoresDataReceived(stores);
+                    }
+
+                    //rv.setAdapter(brandsAdapter);
+                    // dataCallback.onDataReady(brands);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Store>> call, @NonNull Throwable t) {
+                Log.e("failure", "failure: " + t);
+                stores = null;
+                callback.onStoresDataFailed(t);
+            }
+
+        });
+
     }
 }

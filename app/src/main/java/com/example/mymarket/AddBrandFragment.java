@@ -44,8 +44,13 @@ public class AddBrandFragment extends Fragment {
                     Brand newBrand = new Brand();
                     newBrand.setBrandName(newBrandName);
                     Log.e("logBrnd", newBrand.getBrandName());
+
+
+
                     RetrofitInstance retrofitInstance = new RetrofitInstance();
                     retrofitInstance.addBrand(newBrand);
+
+
                     brandNameField.setText("");
                     Toast.makeText(getContext(),"Hai aggiunto: "+newBrand.getBrandName(), Toast.LENGTH_LONG).show();
                     BrandsFragment brandsFragment = new BrandsFragment();
@@ -54,6 +59,11 @@ public class AddBrandFragment extends Fragment {
                     ft.replace(R.id.fragment_container, brandsFragment);
                     ft.addToBackStack(null);
                     ft.commit();
+
+
+
+
+
                 }else {
                     Toast.makeText(getContext(),"Inserisci il nome del brand", Toast.LENGTH_LONG).show();
                 }

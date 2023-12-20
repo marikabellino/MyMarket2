@@ -8,66 +8,63 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mymarket.AddBrandFragment;
 import com.example.mymarket.R;
 import com.example.mymarket.RetrofitInstance;
 import com.example.mymarket.data.StoresList;
 import com.example.mymarket.model.Brand;
+import com.example.mymarket.model.Store;
 import com.example.mymarket.ui.login.AddStoreFragment;
 
 import java.util.List;
 
-public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsViewHolder> {
-    private List<Brand> brandList;
-
-
+public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresViewHolder> {
+    private List<Store> storeList;
     private Context context;
 
-    public BrandsAdapter(List<Brand> brandList, Context context, FragmentManager fragmentManager) {
-        this.brandList = brandList;
+    public StoresAdapter(List<Store> storeList, Context context, FragmentManager fragmentManager) {
+        this.storeList = storeList;
         this.context = context;
         this.fragmentManager = fragmentManager;
-
     }
 
     private FragmentManager fragmentManager;
 
-
     @NonNull
     @Override
-    public BrandsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_marchio, parent, false);
-        return new BrandsViewHolder(view);
+    public StoresAdapter.StoresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_store, parent, false);
+        return new StoresAdapter.StoresViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StoresAdapter.StoresViewHolder holder, int position) {
         Log.e("giov","sono adapter");
-        Brand brand = brandList.get(position);
-        holder.brandName.setText(brand.getBrandName());
+        Store store = storeList.get(position);
+        holder.brandName.setText(store.getIndirizzo());
+        /*
         holder.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("brand", brand.getId());
-                AddStoreFragment addStoreFragment = new AddStoreFragment();
-                addStoreFragment.setArguments(bundle);
+                bundle.putInt("brand", store.getId());
+                AddBrandFragment addBrandFragment = new AddBrandFragment();
+                addBrandFragment.setArguments(bundle);
                 FragmentTransaction fm = fragmentManager.beginTransaction();
-                fm.replace(R.id.fragment_container, addStoreFragment);
+                fm.replace(R.id.fragment_container, addBrandFragment);
                 fm.addToBackStack(null);
                 fm.commit();
             }
-        });
+        });*/
 
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+        /*holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("deleteBtn", " "+brand.getId());
@@ -83,43 +80,41 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Bundle b = new Bundle();
-                 b.putSerializable("selectedBrand", brand);
-                 Log.e("cliccato", " " + brand.getId());
-
-                 StoresList storesList = new StoresList();
-                 storesList.setArguments(b);
-                 FragmentTransaction ft = fragmentManager.beginTransaction();
-                 ft.replace(R.id.fragment_container, storesList );
-                 ft.addToBackStack(null);
-                 ft.commit();
+                Bundle b = new Bundle();
+                b.putSerializable("selectedBrand", brand);
+                StoresList storesList = new StoresList();
+                storesList.setArguments(b);
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.fragment_container, storesList );
+                ft.addToBackStack(null);
+                ft.commit();
             }
-        });
+        });*/
 
     }
 
     @Override
     public int getItemCount() {
-        return brandList.size();
+        return storeList.size();
     }
     public void removeItem(int position) {
-        brandList.remove(position);
+        storeList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
     }
 
-    static class BrandsViewHolder extends RecyclerView.ViewHolder {
+    static class StoresViewHolder extends RecyclerView.ViewHolder {
         TextView brandName;
+        TextView indirizzo;
         CardView card;
         Button addbtn;
         Button deleteBtn;
 
-        public BrandsViewHolder(@NonNull View itemView) {
+        public StoresViewHolder(@NonNull View itemView) {
             super(itemView);
-            brandName = itemView.findViewById(R.id.card_title);
-            addbtn = itemView.findViewById(R.id.add_btn);
-            deleteBtn = itemView.findViewById(R.id.deleteBrandBtn);
-            card = itemView.findViewById(R.id.brand_card);
+            brandName = itemView.findViewById(R.id.card_title2);
+            indirizzo = itemView.findViewById(R.id.indirizzo2);
+           // card = itemView.findViewById(R.id.brand_card);
         }
     }
 }

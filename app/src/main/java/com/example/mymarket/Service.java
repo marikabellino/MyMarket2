@@ -16,14 +16,18 @@ import retrofit2.http.Query;
 
 public interface Service {
 
-    @GET("/all")
+    @GET("/clienti/all")
     Call<List<User>> getUsers(
     );
     @GET("/marchio/all")
     Call<List<Brand>> getBrands(
     );
+    @GET("/marchio/{id}/punti_vendita")
+    Call<List<Store>> getPuntiVenditaToMarchio(
+            @Path("id") int id_marchio
+    );
 
-    @GET("/one/{email}")
+    @GET("/clienti/one/{email}")
     Call<User> singleUser(
     );
     @POST("/clienti/add")
@@ -31,7 +35,7 @@ public interface Service {
             @Body User requestData
     );
 
-    @DELETE("/delete/{email}")
+    @DELETE("/clienti/delete/{email}")
     Call<Void> deleteUser(
             @Query("email") String email
     );

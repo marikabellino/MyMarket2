@@ -32,7 +32,7 @@ public class BrandsFragment extends Fragment implements DataCallback {
     private List<Brand> brandList;
     private FragmentBrandsBinding binding;
     private BrandsAdapter brandsAdapter;
-    private  RetrofitInstance retrofitInstance;
+    private RetrofitInstance retrofitInstance;
 
     public static BrandsFragment newInstance() {
         return new BrandsFragment();
@@ -44,15 +44,17 @@ public class BrandsFragment extends Fragment implements DataCallback {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentBrandsBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
-
         //Gestione RV
         lista = binding.brandsRecycler;
         lista.setLayoutManager(new LinearLayoutManager(requireContext()));
-        lista.setAdapter(brandsAdapter);
         brandList = new ArrayList<>();
         brandsAdapter = new BrandsAdapter(brandList, requireContext(), getParentFragmentManager());
-        retrofitInstance= new RetrofitInstance();
+
+        lista.setAdapter(brandsAdapter);
+        retrofitInstance = new RetrofitInstance();
         retrofitInstance.readBrands(brandsAdapter, this);
+        Log.e("ciao","sono nel brandsfragment");
+
         return root;
     }
 
@@ -74,6 +76,8 @@ public class BrandsFragment extends Fragment implements DataCallback {
     public void onDataReady(List<Brand> l) {
         brandList.addAll(l);
         lista.setAdapter(brandsAdapter);
+        Log.e("ciao","sono nel ondataready");
+
     }
 
 
