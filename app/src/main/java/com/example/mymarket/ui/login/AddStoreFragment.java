@@ -42,11 +42,13 @@ public class AddStoreFragment extends Fragment {
         Button insertBtn = v.findViewById(R.id.insertStore);
         Bundle b = getArguments();
 
-        if(b.getSerializable("updatedStore") != null) {
-            Store updatedStore = (Store) b.getSerializable("updatedStore");
-            insertBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        int brandId = b.getInt("brand");
+        insertBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(b.getSerializable("updatedStore") != null) {
+                    Store updatedStore = (Store) b.getSerializable("updatedStore");
                     String newcity = city.getText().toString();
                     int newCap = Integer.parseInt(cap.getText().toString());
                     String newAddress = address.getText().toString();
@@ -63,14 +65,8 @@ public class AddStoreFragment extends Fragment {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, new BrandsFragment());
                     fragmentTransaction.commit();
-                }
-            });
+                } else {
 
-        } else {
-            int brandId = b.getInt("brand");
-            insertBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
                     String newcity = city.getText().toString();
                     int newCap = Integer.parseInt(cap.getText().toString());
                     String newAddress = address.getText().toString();
@@ -88,10 +84,10 @@ public class AddStoreFragment extends Fragment {
                     fragmentTransaction.replace(R.id.fragment_container, new BrandsFragment());
                     //fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-
                 }
-            });
-        }
+
+            }
+        });
         return v;
     }
 
