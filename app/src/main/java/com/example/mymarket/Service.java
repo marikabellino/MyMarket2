@@ -35,6 +35,9 @@ public interface Service {
     Call<Store> getSingleStore(
             @Path("id") int id
     );
+    @GET("/punto_vendita/all")
+    Call<List<Store>> getAllStores(
+    );
     @GET("/clienti/one/{email}")
     Call<User> singleUser(
     );
@@ -56,7 +59,7 @@ public interface Service {
             @Path("id") int id
     );
     @POST("/marchio/add")
-    Call<Brand> createBrand(
+    Call<Void> createBrand(
             @Body Brand requestData
     );
     @POST("/punto_vendita/addPuntoVenditaToMarchio/{id_brand}")

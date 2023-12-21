@@ -145,22 +145,22 @@ public class RetrofitInstance {
     }
 
     public void addBrand(Brand brand) {
+        Log.e("oggettino", "oggetto: " + brand.toString());
         Retrofit retrofit =
                 new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
                         .baseUrl(baseUrl)
                         .build();
         Service retrofitService = retrofit.create(Service.class);
-        Call<Brand> call = retrofitService.createBrand(brand);
-        call.enqueue(new Callback<Brand>() {
+        Call<Void> call = retrofitService.createBrand(brand);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Brand> call, Response<Brand> response) {
-                Log.e("myLog", "brand aggiunto correttamente");
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.e("oggettino", response.message().toString());
             }
-
             @Override
-            public void onFailure(Call<Brand> call, Throwable t) {
-                Log.e("myLog", t.toString());
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("myLog", t.getMessage().toString());
             }
         });
     }

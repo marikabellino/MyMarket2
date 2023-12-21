@@ -6,7 +6,7 @@
     android:layout_height="200dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/brand_card2"
+        android:id="@+id/brand_card2rrewrwr"
         android:layout_width="300dp"
         android:layout_height="100dp"
         app:cardBackgroundColor="@color/white1"
@@ -21,7 +21,7 @@
 
 
         <TextView
-            android:id="@+id/card_title2"
+            android:id="@+id/card_title2hghfdsdfgdsdf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

@@ -77,7 +77,7 @@ public class DashboardFragment extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
         //catturo l id del singolo item
         int id= item.getItemId();
-        if (id==R.id.menu_add_brand){
+        if (id==R.id.menu_edit){
             AddBrandFragment addBrandFragment = new AddBrandFragment();
             ft.replace(R.id.fragment_container, addBrandFragment)
             .addToBackStack(null)

@@ -43,7 +43,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
     @NonNull
     @Override
     public StoresAdapter.StoresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_store, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_store2, parent, false);
         return new StoresAdapter.StoresViewHolder(view);
     }
 
@@ -52,6 +52,9 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
         Log.e("giov","sono adapter");
         Store store = storeList.get(position);
         holder.brandName.setText(store.getIndirizzo());
+        holder.civico.setText(store.getCivico());
+        holder.citta.setText(store.getCitta());
+        holder.cap.setText(store.getCAP());
 
         /*holder.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +70,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
             }
         });*/
 
-         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+         /*holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("deleteBtn", " " + store.getId());
@@ -79,9 +82,9 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                     removeItem(position);
                 }
             }
-        });
+        });*/
 
-        holder.updatebtn.setOnClickListener(new View.OnClickListener() {
+        /*holder.updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
@@ -95,7 +98,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                 ft.addToBackStack(null);
                 ft.commit();
             }
-        });
+        });*/
     }
 
     @Override
@@ -111,15 +114,21 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
     static class StoresViewHolder extends RecyclerView.ViewHolder {
         TextView brandName;
         TextView indirizzo;
-        ImageButton updatebtn;
-        Button deleteBtn;
+        TextView civico;
+        TextView citta;
+        TextView cap;
+        //ImageButton updatebtn;
+        //Button deleteBtn;
 
         public StoresViewHolder(@NonNull View itemView) {
             super(itemView);
-            brandName = itemView.findViewById(R.id.card_title2);
-            indirizzo = itemView.findViewById(R.id.indirizzo2);
-            deleteBtn = itemView.findViewById(R.id.deletStoreBtn);
-            updatebtn = itemView.findViewById(R.id.editStoreBtn);
+            brandName = itemView.findViewById(R.id.card_title3);
+            indirizzo = itemView.findViewById(R.id.indirizzo3);
+            civico = itemView.findViewById(R.id.civico3);
+            citta = itemView.findViewById(R.id.citta3);
+            cap = itemView.findViewById(R.id.cap3);
+            //deleteBtn = itemView.findViewById(R.id.deletStoreBtn);
+            //updatebtn = itemView.findViewById(R.id.editStoreBtn);
         }
     }
 }

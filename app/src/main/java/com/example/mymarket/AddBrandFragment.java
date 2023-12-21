@@ -46,15 +46,15 @@ public class AddBrandFragment extends Fragment {
         EditText brandNameField = v.findViewById(R.id.brandNameField);
 
         Bundle b = getArguments();
-        /*if(b.getInt("selectedBrand") != 0) {
 
+        if(b != null && b.containsKey("selectedBrandino")) {
             Retrofit retrofit =
                     new Retrofit.Builder()
                             .addConverterFactory(GsonConverterFactory.create())
                             .baseUrl(baseUrl)
                             .build();
             Service retrofitService = retrofit.create(Service.class);
-            Call<Brand> call = retrofitService.getSingleBrand(b.getInt("selectedBrand"));
+            Call<Brand> call = retrofitService.getSingleBrand(b.getInt("selectedBrandino"));
             call.enqueue(new Callback<Brand>() {
                 @Override
                 public void onResponse(@NonNull Call<Brand> call,
@@ -71,13 +71,11 @@ public class AddBrandFragment extends Fragment {
             });
         }
 
-         */
-
         Button addBrandBtn = v.findViewById(R.id.addBrandBtn);
         addBrandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(b.getInt("selectedBrand") != 0) {
+                if(b != null && b.containsKey("selectedBrandino")){
                     Log.e("oggetto", "con oggetto");
                     String newBrandName = brandNameField.getText().toString();
 
@@ -91,7 +89,7 @@ public class AddBrandFragment extends Fragment {
                                     .baseUrl(baseUrl)
                                     .build();
                     Service retrofitService = retrofit.create(Service.class);
-                    Call<Void> call = retrofitService.editBrand(b.getInt("selectedBrand"), brand);
+                    Call<Void> call = retrofitService.editBrand(b.getInt("selectedBrandino"), brand);
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(@NonNull Call<Void> call,
@@ -122,17 +120,13 @@ public class AddBrandFragment extends Fragment {
                         RetrofitInstance retrofitInstance = new RetrofitInstance();
                         retrofitInstance.addBrand(newBrand);
 
-                        brandNameField.setText("");
                         Toast.makeText(getContext(),"Hai aggiunto: "+newBrand.getBrandName(), Toast.LENGTH_LONG).show();
-                        /*BrandsFragment brandsFragment = new BrandsFragment();
+                        BrandsFragment brandsFragment = new BrandsFragment();
                         FragmentManager fm = getParentFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
                         ft.replace(R.id.fragment_container, brandsFragment);
                         ft.addToBackStack(null);
                         ft.commit();
-
-                         */
-
                     }
             }
         });
