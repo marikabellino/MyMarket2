@@ -33,7 +33,7 @@ public class AddBrandFragment extends Fragment {
 
     private AddBrandViewModel mViewModel;
     private Brand brand;
-    private String baseUrl = "https://7f83-151-12-133-222.ngrok-free.app";
+    private String baseUrl = "https://0bb7-151-12-133-222.ngrok-free.app";
 
     public static AddBrandFragment newInstance() {
         return new AddBrandFragment();
@@ -78,6 +78,7 @@ public class AddBrandFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(b.getInt("selectedBrand") != 0) {
+                    Log.e("oggetto", "con oggetto");
                     String newBrandName = brandNameField.getText().toString();
 
                     brand = new Brand();
@@ -113,28 +114,26 @@ public class AddBrandFragment extends Fragment {
                     });
 
                 } else {
-                    if (!brandNameField.getText().toString().equalsIgnoreCase("")){
                         String newBrandName = brandNameField.getText().toString().toUpperCase();
                         Brand newBrand = new Brand();
                         newBrand.setBrandName(newBrandName);
-                        Log.e("logBrnd", newBrand.getBrandName());
+                        Log.e("oggetto", "senza oggetto");
 
                         RetrofitInstance retrofitInstance = new RetrofitInstance();
                         retrofitInstance.addBrand(newBrand);
 
                         brandNameField.setText("");
                         Toast.makeText(getContext(),"Hai aggiunto: "+newBrand.getBrandName(), Toast.LENGTH_LONG).show();
-                        BrandsFragment brandsFragment = new BrandsFragment();
+                        /*BrandsFragment brandsFragment = new BrandsFragment();
                         FragmentManager fm = getParentFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
                         ft.replace(R.id.fragment_container, brandsFragment);
                         ft.addToBackStack(null);
                         ft.commit();
 
-                    }else {
-                        Toast.makeText(getContext(),"Inserisci il nome del brand", Toast.LENGTH_LONG).show();
+                         */
+
                     }
-                }
             }
         });
         return v;

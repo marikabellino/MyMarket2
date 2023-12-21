@@ -35,7 +35,7 @@ public class AddStoreFragment extends Fragment implements SingleStoreCallBack {
 
     private AddStoreViewModel mViewModel;
     private Store store;
-    private String baseUrl = "https://7f83-151-12-133-222.ngrok-free.app";
+    private String baseUrl = "https://0bb7-151-12-133-222.ngrok-free.app";
 
     public static AddStoreFragment newInstance() {
         return new AddStoreFragment();
