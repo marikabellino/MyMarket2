@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymarket.adapter.BrandsAdapter;
 import com.example.mymarket.adapter.StoresAdapter;
+import com.example.mymarket.data.interfaces.SingleUserCallback;
 import com.example.mymarket.model.Brand;
 import com.example.mymarket.model.Store;
 import com.example.mymarket.model.User;
@@ -28,10 +29,18 @@ public class RetrofitInstance {
     private Store singleStore;
     private User user;
 
-    //String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
+    String baseUrl = "https://sacred-nominally-lizard.ngrok-free.app";
     //String baseUrl = "https://2796-151-12-133-222.ngrok-free.app";
    // String baseUrl = "https://0ee6-151-12-133-222.ngrok-free.app";
-    String baseUrl = "https://0bb7-151-12-133-222.ngrok-free.app";
+    //String baseUrl = "https://0bb7-151-12-133-222.ngrok-free.app";
+
+    Retrofit retrofit =
+            new Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(baseUrl)
+                    .build();
+
+    Service retrofitService = retrofit.create(Service.class);
 
     public void readUsers(UserAdapter userAdapter) {
 
@@ -99,28 +108,25 @@ public class RetrofitInstance {
 
     }
 
-    public User singleUser(String email) {
-
-        Retrofit retrofit =
-                new Retrofit.Builder()
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(baseUrl)
-                        .build();
-        Service retrofitService = retrofit.create(Service.class);
-        Call<User> call = retrofitService.singleUser();
+    public void singleUser(String email, SingleUserCallback singleUserCallback) {
+        //Log.e("isUser", email+"xxx");
+        Call<User> call = retrofitService.singleUser(email);
+        // Log.e("isUser", call.request().url().toString());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                user = response.body();
+                User  user = response.body();
+                //Log.e("isUser", user.toString());
+                singleUserCallback.onSingleUserDataReceived(user);
 
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                Log.e("isUser", "errore");
                 user = null;
             }
         });
-        return user;
     }
 
     public void addUser(User user) {

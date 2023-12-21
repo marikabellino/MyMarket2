@@ -1,9 +1,13 @@
 package com.example.mymarket.data
+
+import com.example.mymarket.data.dtos.Cliente
+import com.example.mymarket.data.dtos.Marchio
+import com.example.mymarket.data.dtos.PuntiVendita
 import com.example.mymarket.data.network.ClienteService
 import com.example.mymarket.data.network.MarchioService
 import com.example.mymarket.data.network.OrdineService
 import com.example.mymarket.data.network.ProdottoService
-import com.example.mymarket.data.network.PuntoVenditaService
+import com.example.mymarket.data.network.PuntiVenditaService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,8 +18,8 @@ class RetrofitInstanceKot {
     private val marchioService: MarchioService =
         provideRetrofit().create(MarchioService::class.java)
 
-    private val puntoVenditaService: PuntoVenditaService =
-        provideRetrofit().create(PuntoVenditaService::class.java)
+    private val puntiVenditaService: PuntiVenditaService =
+        provideRetrofit().create(PuntiVenditaService::class.java)
 
     private val ordineService: OrdineService =
         provideRetrofit().create(OrdineService::class.java)
@@ -42,27 +46,29 @@ class RetrofitInstanceKot {
             .client(client)
             .build()
     }
-/*
-   suspend fun getCliente(): List<Cliente> {
-        return clienteService.getDetailsCliente()
-    }*/
 
-   /* suspend fun getItemsNews(newsId: Int): ItemsDto {
-        return newsService.newsStoriesItems(newsId)
+    suspend fun getCliente(): List<Cliente> {
+        return clienteService.getClienti()
     }
 
-    suspend fun getIdTops(): TopsDto {
-        return topsService.topStories()
+    suspend fun getEmailCliente(emailCliente : String) : Cliente{
+        return clienteService.getEmailCliente(emailCliente)
     }
 
-    suspend fun getItemsTops(topsId: Int): ItemsDto {
-        return topsService.topStoriesItems(topsId)
-    }
-    suspend fun getIdBestStories(): BestStoriesDto {
-        return bestStoriesService.bestStories()
+    suspend fun getItemsMarchio(): List<Marchio> {
+        return marchioService.getDetailsMarchio()
     }
 
-    suspend fun getItemsBestStories(bestStoriesId: Int): ItemsDto {
-        return bestStoriesService.bestStoriesItems(bestStoriesId)
-    }*/
+    suspend fun getItemsPuntiVendita(): List<PuntiVendita> {
+        return puntiVenditaService.getPuntiVendita()
+    }
+
+
+    /* suspend fun getIdBestStories(): BestStoriesDto {
+         return bestStoriesService.bestStories()
+     }
+
+     suspend fun getItemsBestStories(bestStoriesId: Int): ItemsDto {
+         return bestStoriesService.bestStoriesItems(bestStoriesId)
+     }*/
 }

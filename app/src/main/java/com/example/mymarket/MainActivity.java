@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnUserTypeSelecte
         // Inizializza il fragment solo se l'attività è appena stata creata
         if (savedInstanceState == null) {
             SwitchFragment switchFragment = new SwitchFragment();
-            switchFragment.setOnUserTypeSelectedListener(this);
+            switchFragment.setOnUserTypeSelectedListener();
 
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, switchFragment)

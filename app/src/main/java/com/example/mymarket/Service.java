@@ -40,6 +40,7 @@ public interface Service {
     );
     @GET("/clienti/one/{email}")
     Call<User> singleUser(
+            @Path("email") String email
     );
     @POST("/clienti/add")
     Call<User> createUser(

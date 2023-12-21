@@ -1,15 +1,6 @@
 package com.example.mymarket;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.mymarket.model.User;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.mymarket.model.User;
+import com.example.mymarket.ui.cliente.home.MarchioFragment;
 
 public class RegisterFragment extends Fragment {
 
@@ -69,8 +64,8 @@ public class RegisterFragment extends Fragment {
                             RetrofitInstance retrofitInstance = new RetrofitInstance();
                             retrofitInstance.addUser(user);
                             SharedPreferencesManager.saveUserData(requireContext(), user);
-                            HomeFragment homeFragment = new HomeFragment();
-                            fragmentTransaction.replace(R.id.register_frag, homeFragment)
+                            MarchioFragment marchioFragment = new MarchioFragment();
+                            fragmentTransaction.replace(R.id.register_frag, marchioFragment)
                                     .addToBackStack(null)
                                     .commit();
 
@@ -80,7 +75,7 @@ public class RegisterFragment extends Fragment {
                             Log.e("Ruolo", "sono un amministratore");
                             RetrofitInstance retrofitInstance = new RetrofitInstance();
                             retrofitInstance.addUser(user);
-                            SharedPreferencesManager.saveUserData(requireContext(), user);
+                            SharedPreferencesManager.saveAdminData(requireContext(), user);
                             DashboardFragment dashboardFragment = new DashboardFragment();
                             Bundle bundle = new Bundle();
                             bundle.putString("username", user.getNome());
