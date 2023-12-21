@@ -30,13 +30,14 @@ import java.util.List;
 public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsViewHolder> {
     private List<Brand> brandList;
 
-
+    private String visibility;
     private Context context;
 
-    public BrandsAdapter(List<Brand> brandList, Context context, FragmentManager fragmentManager) {
+    public BrandsAdapter(List<Brand> brandList, Context context, FragmentManager fragmentManager, String visibility) {
         this.brandList = brandList;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.visibility = visibility;
 
     }
 
@@ -46,7 +47,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
     @NonNull
     @Override
     public BrandsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_marchio2, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_marchio, parent, false);
         return new BrandsViewHolder(view);
     }
 
@@ -54,8 +55,18 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
     public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
         Log.e("giov","sono adapter");
         Brand brand = brandList.get(position);
+        Log.e("ciao", visibility);
         holder.brandName.setText(brand.getBrandName());
-        /*holder.addbtn.setOnClickListener(new View.OnClickListener() {
+
+        if(visibility.equalsIgnoreCase("invisibile")) {
+
+            holder.addbtn.setVisibility(View.INVISIBLE);
+            holder.deleteBtn.setVisibility(View.INVISIBLE);
+            holder.updateBtn.setVisibility(View.INVISIBLE);
+        }
+
+
+        holder.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -80,7 +91,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
                     removeItem(position);
                 }
             }
-        });*/
+        });
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +108,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
             }
         });
 
-        /*holder.updateBtn.setOnClickListener(new View.OnClickListener() {
+        holder.updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("brandbutton","sono cliccato");
@@ -112,7 +123,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
                 ft.addToBackStack(null);
                 ft.commit();
             }
-        });*/
+        });
     }
 
     @Override
@@ -128,17 +139,17 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
     static class BrandsViewHolder extends RecyclerView.ViewHolder {
         TextView brandName;
         CardView card;
-        //Button addbtn;
-        //Button deleteBtn;
-        //ImageButton updateBtn;
+        Button addbtn;
+        Button deleteBtn;
+        ImageButton updateBtn;
 
         public BrandsViewHolder(@NonNull View itemView) {
             super(itemView);
-            brandName = itemView.findViewById(R.id.card_title2);
-            //addbtn = itemView.findViewById(R.id.add_btn);
-            //deleteBtn = itemView.findViewById(R.id.deleteBrandBtn);
-            card = itemView.findViewById(R.id.brand_card2);
-            //updateBtn = itemView.findViewById(R.id.editBrandBtn);
+            brandName = itemView.findViewById(R.id.card_title);
+            addbtn = itemView.findViewById(R.id.add_btn);
+            deleteBtn = itemView.findViewById(R.id.deleteBrandBtn);
+            card = itemView.findViewById(R.id.brand_card);
+            updateBtn = itemView.findViewById(R.id.editBrandBtn);
         }
     }
 }

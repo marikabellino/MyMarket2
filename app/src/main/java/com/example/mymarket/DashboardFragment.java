@@ -77,13 +77,24 @@ public class DashboardFragment extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
         //catturo l id del singolo item
         int id= item.getItemId();
-        if (id==R.id.menu_edit){
+        if (id==R.id.menu_brand){
+            Bundle bundle = new Bundle();
+            bundle.putString("ciao", "invisibile");
+            BrandsFragment brandsFragment = new BrandsFragment();
+            brandsFragment.setArguments(bundle);
+            ft.replace(R.id.fragment_container, brandsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id==R.id.menu_stores) {
             AddBrandFragment addBrandFragment = new AddBrandFragment();
             ft.replace(R.id.fragment_container, addBrandFragment)
-            .addToBackStack(null)
+                    .addToBackStack(null)
                     .commit();
-        } else if (id==R.id.menu_brand) {
+        }else if (id==R.id.menu_edit) {
+            Bundle bundle = new Bundle();
+            bundle.putString("ciao", "visibile");
             BrandsFragment brandsFragment = new BrandsFragment();
+            brandsFragment.setArguments(bundle);
             ft.replace(R.id.fragment_container, brandsFragment)
                     .addToBackStack(null)
                     .commit();

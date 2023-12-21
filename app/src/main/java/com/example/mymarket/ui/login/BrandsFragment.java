@@ -1,5 +1,7 @@
 package com.example.mymarket.ui.login;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -14,7 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.mymarket.AddBrandFragment;
 import com.example.mymarket.DataCallback;
 import com.example.mymarket.R;
 import com.example.mymarket.RetrofitInstance;
@@ -42,18 +47,39 @@ public class BrandsFragment extends Fragment implements DataCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         binding = FragmentBrandsBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
         //Gestione RV
         lista = binding.brandsRecycler;
         lista.setLayoutManager(new LinearLayoutManager(requireContext()));
         brandList = new ArrayList<>();
-        brandsAdapter = new BrandsAdapter(brandList, requireContext(), getParentFragmentManager());
+        Bundle bundle = getArguments();
+        bundle.getString("ciao");
+        String ciao = bundle.getString("ciao");
+        brandsAdapter = new BrandsAdapter(brandList, requireContext(), getParentFragmentManager(), ciao);
 
         lista.setAdapter(brandsAdapter);
         retrofitInstance = new RetrofitInstance();
         retrofitInstance.readBrands(brandsAdapter, this);
         Log.e("ciao","sono nel brandsfragment");
+
+        Button button = root.findViewById(R.id.addBrandBtn2);
+        if(ciao.equalsIgnoreCase("invisibile")){
+            button.setVisibility(View.INVISIBLE);
+        }
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddBrandFragment addFragment = new AddBrandFragment();
+                FragmentManager fm = getParentFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container, addFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
 
         return root;
     }
