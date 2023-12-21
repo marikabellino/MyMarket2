@@ -7,13 +7,14 @@
             />
 
         <item
-            android:id="@+id/menu_add_brand"
-            android:title="Aggiungi Brand"
-            />
-
-        <item
             android:id="@+id/menu_stores"
             android:title="Stores"
             />
+        <item
+            android:id="@+id/menu_edit"
+            android:title="Modifica"
+            />
+
+
 
 </menu>
