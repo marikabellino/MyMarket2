@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymarket.adapter.BrandsAdapter;
+import com.example.mymarket.adapter.ProductAdapter;
 import com.example.mymarket.adapter.StoresAdapter;
 import com.example.mymarket.data.interfaces.SingleUserCallback;
 import com.example.mymarket.model.Brand;
+import com.example.mymarket.model.Prodotto;
 import com.example.mymarket.model.Store;
 import com.example.mymarket.model.User;
+import com.example.mymarket.ui.login.ProdottoCallback;
 
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class RetrofitInstance {
     private List<User> users;
     private List<Brand> brands;
     private List<Store> stores;
+    private List<Prodotto> prodotti;
     private Store singleStore;
     private User user;
 
@@ -344,5 +348,34 @@ public class RetrofitInstance {
             }
         });
     }
+    public void readAllProducts(ProductAdapter productAdapter, ProdottoCallback callBack, String tipologia) {
+        Retrofit retrofit =
+                new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(baseUrl)
+                        .build();
+        Service retrofitService = retrofit.create(Service.class);
+        Call<List<Prodotto>> call = retrofitService.getProducts(tipologia);
+        call.enqueue(new Callback<List<Prodotto>>() {
+            @Override
+            public void onResponse(Call<List<Prodotto>> call,
+                                   Response<List<Prodotto>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    prodotti = response.body();
+                    //Log.e("giov",stores.toString());
+                    productAdapter.notifyDataSetChanged();
+                    if(prodotti != null)
+                    {
+                        callBack.onProductReceived(prodotti);
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(@NonNull Call<List<Prodotto>> call, @NonNull Throwable t) {
+                Log.e("failure", "failure: " + t);
+                callBack.onProductFailure(t);
+            }
+        });
+    }
 }

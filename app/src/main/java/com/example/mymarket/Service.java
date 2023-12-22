@@ -1,6 +1,7 @@
 package com.example.mymarket;
 
 import com.example.mymarket.model.Brand;
+import com.example.mymarket.model.Prodotto;
 import com.example.mymarket.model.Store;
 import com.example.mymarket.model.User;
 
@@ -77,5 +78,10 @@ public interface Service {
     Call<Void> editBrand(
             @Path("id") int id,
             @Body Brand requestData
+    );
+
+    @GET("/prodotti/all/{categoria}")
+    Call<List<Prodotto>> getProducts(
+        @Path("categoria") String tipologia
     );
 }

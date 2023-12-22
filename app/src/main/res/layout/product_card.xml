@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/bgProduct" />
 
             <TextView
-                android:id="@+id/prroduct_origin"
+                android:id="@+id/product_origin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -86,7 +86,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/prroduct_origin" />
+                app:layout_constraintTop_toBottomOf="@+id/product_origin" />
 
             <TextView
                 android:id="@+id/product_price"
