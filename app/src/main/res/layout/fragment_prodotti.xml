@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_punti_vendita"
-    tools:context=".ui.cliente.home.PuntiVenditaFragment">
+    tools:context=".ui.login.cliente.home.ProdottiFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_punti_vendita"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:text="Hello" />
 
 </FrameLayout>

@@ -6,5 +6,5 @@ data class PuntiVendita(
     val civico: String,
     val id: Int,
     val indirizzo: String,
-    val prodotti: List<Any>
+    val prodotti: List<Prodotti>
 )

@@ -16,12 +16,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mymarket.DashboardFragment;
+import com.example.mymarket.HomeFragment;
 import com.example.mymarket.R;
 import com.example.mymarket.RetrofitInstance;
 import com.example.mymarket.SharedPreferencesManager;
 import com.example.mymarket.data.interfaces.SingleUserCallback;
 import com.example.mymarket.model.User;
-import com.example.mymarket.ui.cliente.home.MarchioFragment;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginFragment extends Fragment implements SingleUserCallback {
@@ -40,7 +40,7 @@ public class LoginFragment extends Fragment implements SingleUserCallback {
         Bundle bundle = getArguments();
         isUser = bundle.getBoolean("isUser");
 
-       Button login = v.findViewById(R.id.my_login_btn);
+        Button login = v.findViewById(R.id.my_login_btn);
 
         EditText username = v.findViewById(R.id.username);
         EditText pw = v.findViewById(R.id.password);
@@ -81,8 +81,11 @@ public class LoginFragment extends Fragment implements SingleUserCallback {
                     dashboardFragment.setArguments(b);
                     goToFragment(dashboardFragment);
                 } else if (user != null && user.getId() != -1 && !u.equals("") && !p.equals("")) {
-                    goToFragment(new MarchioFragment());
-                    Log.e("giov", "sono qui, ciaone dal marchio");
+                    Bundle b = new Bundle();
+                    b.putString("username", user.getNome());
+                    HomeFragment homeFragment = new HomeFragment();
+                    homeFragment.setArguments(b);
+                    goToFragment(homeFragment);
                 } else if (!u.equals("") && !p.equals("")) {
                     RetrofitInstance retrofitInstance = new RetrofitInstance();
                     retrofitInstance.singleUser(u, this);
@@ -117,6 +120,7 @@ public class LoginFragment extends Fragment implements SingleUserCallback {
 
         if (user != null) {
 
+
             if (user.getEmail().equals(u) && user.getPassword().equals(p)) {
                 if (user.getAdmin() != isUser) {
                     if (user.getAdmin()) {
@@ -126,7 +130,11 @@ public class LoginFragment extends Fragment implements SingleUserCallback {
                         dashboardFragment.setArguments(b);
                         goToFragment(dashboardFragment);
                     } else {
-                        goToFragment(new MarchioFragment());
+                        Bundle b = new Bundle();
+                        b.putString("username", user.getNome());
+                        HomeFragment homeFragment = new HomeFragment();
+                        homeFragment.setArguments(b);
+                        goToFragment(homeFragment);
                     }
                 } else {
                     Snackbar.make(

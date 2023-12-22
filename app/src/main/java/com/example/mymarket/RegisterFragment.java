@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mymarket.model.User;
-import com.example.mymarket.ui.cliente.home.MarchioFragment;
+import com.example.mymarket.ui.login.cliente.home.MarchioFragment;
 
 public class RegisterFragment extends Fragment {
 

@@ -4,15 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymarket.data.dtos.PuntiVendita
-import com.example.mymarket.databinding.ItemsPuntiVenditaBinding
+import com.example.mymarket.databinding.ItemsStore2Binding
 
 class PuntiVenditaAdapter(
-    private val puntiVenditaList : List<PuntiVendita>
+    private val puntiVenditaList : List<PuntiVendita>,
+    private val onClickItems: (PuntiVendita) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PuntiVenditaViewHolder(
-            ItemsPuntiVenditaBinding.inflate(
+            ItemsStore2Binding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -28,6 +29,9 @@ class PuntiVenditaAdapter(
         when (holder) {
             is PuntiVenditaViewHolder -> {
                 holder.bindPuntiVenditaCardView(puntiVenditaList[position])
+                holder.itemView.setOnClickListener {
+                    onClickItems(puntiVenditaList[position])
+                }
             }
         }
     }

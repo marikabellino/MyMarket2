@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymarket.data.dtos.Marchio
-import com.example.mymarket.databinding.ItemsMarchioClienteBinding
+import com.example.mymarket.databinding.ItemsMarchio2Binding
 
 class MarchioAdapter(
     private val brandList: List<Marchio>,
@@ -13,7 +13,7 @@ class MarchioAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MarchioViewHolder(
-            ItemsMarchioClienteBinding.inflate(
+            ItemsMarchio2Binding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

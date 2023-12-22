@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.BrandsFragment"
-    android:id="@+id/brands_list"
+    android:id="@+id/fragment_stores_list"
     android:background="@color/white1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
