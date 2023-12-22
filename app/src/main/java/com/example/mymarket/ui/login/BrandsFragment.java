@@ -55,8 +55,12 @@ public class BrandsFragment extends Fragment implements DataCallback {
         lista.setLayoutManager(new LinearLayoutManager(requireContext()));
         brandList = new ArrayList<>();
         Bundle bundle = getArguments();
-        bundle.getString("ciao");
-        String ciao = bundle.getString("ciao");
+        String ciao = "visible";
+        if(bundle != null && bundle.containsKey("ciao"))
+        {
+            ciao = bundle.getString("ciao");
+        }
+
         brandsAdapter = new BrandsAdapter(brandList, requireContext(), getParentFragmentManager(), ciao);
 
         lista.setAdapter(brandsAdapter);

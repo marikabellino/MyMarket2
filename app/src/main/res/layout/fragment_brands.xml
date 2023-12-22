@@ -49,18 +49,18 @@
             android:id="@+id/addBrandBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:backgroundTint="@android:color/transparent"
             android:fontFamily="@font/roboto_light_italic"
-            android:layout_marginTop="5dp"
             android:text="+ Aggiungi un marchio"
-            android:textSize="20dp"
             android:textColor="@color/green"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.003" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
