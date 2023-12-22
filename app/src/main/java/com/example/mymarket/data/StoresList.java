@@ -48,6 +48,21 @@ public class StoresList extends Fragment implements StoreCallBack {
         View root = binding.getRoot();
 
         Bundle b = getArguments();
+        boolean allStores = false;
+
+        if(b.containsKey("booleano"))
+        {
+            allStores = b.getBoolean("booleano");
+            recycler = binding.storesRecycler;
+            recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
+            storeList = new ArrayList<>();
+            storesAdapter = new StoresAdapter(storeList, requireContext(), getParentFragmentManager(), allStores);
+
+            recycler.setAdapter(storesAdapter);
+            retrofitInstance = new RetrofitInstance();
+            retrofitInstance.readAllStores(storesAdapter, this);
+        }
+
         int selectedBrand = b.getInt("selectedBrand",2);
 
         Log.e("myBrandLog", selectedBrand + " ");
@@ -55,7 +70,7 @@ public class StoresList extends Fragment implements StoreCallBack {
         recycler = binding.storesRecycler;
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         storeList = new ArrayList<>();
-        storesAdapter = new StoresAdapter(storeList, requireContext(), getParentFragmentManager(), selectedBrand);
+        storesAdapter = new StoresAdapter(storeList, requireContext(), getParentFragmentManager(), selectedBrand, allStores);
 
         recycler.setAdapter(storesAdapter);
         retrofitInstance = new RetrofitInstance();

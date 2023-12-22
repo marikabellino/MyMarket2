@@ -55,21 +55,20 @@ public class BrandsFragment extends Fragment implements DataCallback {
         lista.setLayoutManager(new LinearLayoutManager(requireContext()));
         brandList = new ArrayList<>();
         Bundle bundle = getArguments();
-        String ciao = "visible";
-        if(bundle != null && bundle.containsKey("ciao"))
+        boolean visibility = false;
+        if(bundle != null && bundle.containsKey("visibility"))
         {
-            ciao = bundle.getString("ciao");
+            visibility = bundle.getBoolean("visibility");
         }
 
-        brandsAdapter = new BrandsAdapter(brandList, requireContext(), getParentFragmentManager(), ciao);
-
+        brandsAdapter = new BrandsAdapter(brandList, requireContext(), getParentFragmentManager(), visibility);
         lista.setAdapter(brandsAdapter);
         retrofitInstance = new RetrofitInstance();
         retrofitInstance.readBrands(brandsAdapter, this);
         Log.e("ciao","sono nel brandsfragment");
 
         Button button = root.findViewById(R.id.addBrandBtn2);
-        if(ciao.equalsIgnoreCase("invisibile")){
+        if(!visibility){
             button.setVisibility(View.INVISIBLE);
         }
 
@@ -105,9 +104,8 @@ public class BrandsFragment extends Fragment implements DataCallback {
     @Override
     public void onDataReady(List<Brand> l) {
         brandList.addAll(l);
-        lista.setAdapter(brandsAdapter);
+        brandsAdapter.notifyDataSetChanged();
         Log.e("ciao","sono nel ondataready");
-
     }
 
 

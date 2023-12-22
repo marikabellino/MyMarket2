@@ -6,7 +6,7 @@
     android:layout_height="200dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/brand_card3"
+        android:id="@+id/brand_card_store"
         android:layout_width="300dp"
         android:layout_height="100dp"
         app:cardBackgroundColor="@color/white1"
@@ -21,7 +21,7 @@
 
 
         <TextView
-            android:id="@+id/card_title3"
+            android:id="@+id/card_title_store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -33,7 +33,7 @@
             android:textSize="20dp"
             android:textStyle="bold" />
         <ImageButton
-            android:id="@+id/editStoreBtn"
+            android:id="@+id/editStoreBtn_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -43,7 +43,7 @@
             app:srcCompat="@drawable/baseline_edit_24" />
 
         <TextView
-            android:id="@+id/indirizzo2"
+            android:id="@+id/indirizzo_store"
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:layout_marginTop="40dp"
@@ -54,7 +54,7 @@
 
 
         <TextView
-            android:id="@+id/civico2"
+            android:id="@+id/civico_store"
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:layout_marginTop="40dp"
@@ -64,7 +64,7 @@
             android:text="Numero Civico" />
 
         <TextView
-            android:id="@+id/citta2"
+            android:id="@+id/citta_store"
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:layout_marginTop="60dp"
@@ -74,7 +74,7 @@
             android:text="Città" />
 
         <TextView
-            android:id="@+id/cap2"
+            android:id="@+id/cap_store"
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:layout_marginTop="60dp"
@@ -84,7 +84,7 @@
             android:text="CAP" />
 
         <Button
-            android:id="@+id/deletStoreBtn"
+            android:id="@+id/deletStoreBtn_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light_italic"
@@ -94,9 +94,5 @@
             android:text="-Elimina Store"
             android:textColor="@color/green" />
 
-
-
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,10 +30,10 @@ import java.util.List;
 public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsViewHolder> {
     private List<Brand> brandList;
 
-    private String visibility;
+    private boolean visibility;
     private Context context;
 
-    public BrandsAdapter(List<Brand> brandList, Context context, FragmentManager fragmentManager, String visibility) {
+    public BrandsAdapter(List<Brand> brandList, Context context, FragmentManager fragmentManager, boolean visibility) {
         this.brandList = brandList;
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -55,30 +55,33 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
     public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
         Log.e("giov","sono adapter");
         Brand brand = brandList.get(position);
-        Log.e("ciao", visibility);
         holder.brandName.setText(brand.getBrandName());
 
-        if(visibility.equalsIgnoreCase("invisibile")) {
-
+        if(!visibility) {
             holder.addbtn.setVisibility(View.INVISIBLE);
             holder.deleteBtn.setVisibility(View.INVISIBLE);
             holder.updateBtn.setVisibility(View.INVISIBLE);
+            holder.card.setEnabled(false);
+            Log.e("cliccabile","click: " + holder.card.isClickable());
+        } else {
+            holder.card.setEnabled(true);
+            holder.card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle b = new Bundle();
+                    b.putInt("selectedBrand", brand.getId());
+                    Log.e("cliccato", " " + brand.getId());
+
+                    StoresList storesList = new StoresList();
+                    storesList.setArguments(b);
+                    FragmentTransaction ft = fragmentManager.beginTransaction();
+                    ft.replace(R.id.fragment_container, storesList );
+                    ft.addToBackStack(null);
+                    ft.commit();
+                }
+            });
         }
 
-
-        holder.addbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("brand", brand.getId());
-                AddStoreFragment addStoreFragment = new AddStoreFragment();
-                addStoreFragment.setArguments(bundle);
-                FragmentTransaction fm = fragmentManager.beginTransaction();
-                fm.replace(R.id.fragment_container, addStoreFragment);
-                fm.addToBackStack(null);
-                fm.commit();
-            }
-        });
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,21 +93,6 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
                 if (position != RecyclerView.NO_POSITION) {
                     removeItem(position);
                 }
-            }
-        });
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 Bundle b = new Bundle();
-                 b.putInt("selectedBrand", brand.getId());
-                 Log.e("cliccato", " " + brand.getId());
-
-                 StoresList storesList = new StoresList();
-                 storesList.setArguments(b);
-                 FragmentTransaction ft = fragmentManager.beginTransaction();
-                 ft.replace(R.id.fragment_container, storesList );
-                 ft.addToBackStack(null);
-                 ft.commit();
             }
         });
 

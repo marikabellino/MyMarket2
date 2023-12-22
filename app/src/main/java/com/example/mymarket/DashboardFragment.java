@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mymarket.data.StoresList;
 import com.example.mymarket.ui.login.BrandsFragment;
 
 
@@ -78,21 +79,21 @@ public class DashboardFragment extends Fragment {
         //catturo l id del singolo item
         int id= item.getItemId();
         if (id==R.id.menu_brand){
-            Bundle bundle = new Bundle();
-            bundle.putString("ciao", "invisibile");
             BrandsFragment brandsFragment = new BrandsFragment();
-            brandsFragment.setArguments(bundle);
             ft.replace(R.id.fragment_container, brandsFragment)
                     .addToBackStack(null)
                     .commit();
         } else if (id==R.id.menu_stores) {
-            AddBrandFragment addBrandFragment = new AddBrandFragment();
-            ft.replace(R.id.fragment_container, addBrandFragment)
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("booleano", true);
+            StoresList storesList = new StoresList();
+            storesList.setArguments(bundle);
+            ft.replace(R.id.fragment_container, storesList)
                     .addToBackStack(null)
                     .commit();
         }else if (id==R.id.menu_edit) {
             Bundle bundle = new Bundle();
-            bundle.putString("ciao", "visibile");
+            bundle.putBoolean("visibility", true);
             BrandsFragment brandsFragment = new BrandsFragment();
             brandsFragment.setArguments(bundle);
             ft.replace(R.id.fragment_container, brandsFragment)

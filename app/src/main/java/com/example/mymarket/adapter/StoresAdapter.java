@@ -31,11 +31,21 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
     private Context context;
     private int id_brand;
 
-    public StoresAdapter(List<Store> storeList, Context context, FragmentManager fragmentManager, int id_brand) {
+    private boolean allStores;
+
+    public StoresAdapter(List<Store> storeList, Context context, FragmentManager fragmentManager, int id_brand, boolean allStores) {
         this.storeList = storeList;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.id_brand = id_brand;
+        this.allStores = allStores;
+    }
+
+    public StoresAdapter(List<Store> storeList, Context context, FragmentManager fragmentManager, boolean allStores) {
+        this.storeList = storeList;
+        this.context = context;
+        this.fragmentManager = fragmentManager;
+        this.allStores = allStores;
     }
 
     private FragmentManager fragmentManager;
@@ -43,34 +53,25 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
     @NonNull
     @Override
     public StoresAdapter.StoresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_store2, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_store, parent,false);
         return new StoresAdapter.StoresViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoresAdapter.StoresViewHolder holder, int position) {
-        Log.e("giov","sono adapter");
+        Log.e("store","store: " + storeList.get(position));
         Store store = storeList.get(position);
         holder.brandName.setText(store.getIndirizzo());
         holder.civico.setText(store.getCivico());
         holder.citta.setText(store.getCitta());
-        holder.cap.setText(store.getCAP());
+        holder.cap.setText(store.getCAP()+"");
 
-        /*holder.addbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("brand", store.getId());
-                AddBrandFragment addBrandFragment = new AddBrandFragment();
-                addBrandFragment.setArguments(bundle);
-                FragmentTransaction fm = fragmentManager.beginTransaction();
-                fm.replace(R.id.fragment_container, addBrandFragment);
-                fm.addToBackStack(null);
-                fm.commit();
-            }
-        });*/
+        if(allStores){
+           holder.updatebtn.setVisibility(View.INVISIBLE);
+           holder.deleteBtn.setVisibility(View.INVISIBLE);
+        }
 
-         /*holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("deleteBtn", " " + store.getId());
@@ -82,9 +83,9 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                     removeItem(position);
                 }
             }
-        });*/
+        });
 
-        /*holder.updatebtn.setOnClickListener(new View.OnClickListener() {
+        holder.updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
@@ -98,7 +99,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                 ft.addToBackStack(null);
                 ft.commit();
             }
-        });*/
+        });
     }
 
     @Override
@@ -117,18 +118,18 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
         TextView civico;
         TextView citta;
         TextView cap;
-        //ImageButton updatebtn;
-        //Button deleteBtn;
+        ImageButton updatebtn;
+        Button deleteBtn;
 
         public StoresViewHolder(@NonNull View itemView) {
             super(itemView);
-            brandName = itemView.findViewById(R.id.card_title3);
-            indirizzo = itemView.findViewById(R.id.indirizzo3);
-            civico = itemView.findViewById(R.id.civico3);
-            citta = itemView.findViewById(R.id.citta3);
-            cap = itemView.findViewById(R.id.cap3);
-            //deleteBtn = itemView.findViewById(R.id.deletStoreBtn);
-            //updatebtn = itemView.findViewById(R.id.editStoreBtn);
+            brandName = itemView.findViewById(R.id.card_title_store);
+            indirizzo = itemView.findViewById(R.id.indirizzo_store);
+            civico = itemView.findViewById(R.id.civico_store);
+            citta = itemView.findViewById(R.id.citta_store);
+            cap = itemView.findViewById(R.id.cap_store);
+            deleteBtn = itemView.findViewById(R.id.deletStoreBtn_store);
+            updatebtn = itemView.findViewById(R.id.editStoreBtn_store);
         }
     }
 }

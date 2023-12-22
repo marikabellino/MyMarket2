@@ -91,21 +91,15 @@ public class RetrofitInstance {
                     {
                         callback.onDataReady(brands);
                     }
-
-                    //rv.setAdapter(brandsAdapter);
-                   // dataCallback.onDataReady(brands);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Brand>> call, @NonNull Throwable t) {
                 Log.e("failure", "failure: " + t);
-                brands = null;
                 callback.onCustomerDataFailed(t);
             }
-
         });
-
     }
 
     public void singleUser(String email, SingleUserCallback singleUserCallback) {
@@ -118,7 +112,6 @@ public class RetrofitInstance {
                 User  user = response.body();
                 //Log.e("isUser", user.toString());
                 singleUserCallback.onSingleUserDataReceived(user);
-
             }
 
             @Override
@@ -317,6 +310,37 @@ public class RetrofitInstance {
             @Override
             public void onFailure(@NonNull Call<Store> call, @NonNull Throwable t) {
 
+            }
+        });
+    }
+
+    public void readAllStores(StoresAdapter storesAdapter, StoreCallBack callBack) {
+        Retrofit retrofit =
+                new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(baseUrl)
+                        .build();
+        Service retrofitService = retrofit.create(Service.class);
+        Call<List<Store>> call = retrofitService.getAllStores();
+        call.enqueue(new Callback<List<Store>>() {
+            @Override
+            public void onResponse(Call<List<Store>> call,
+                                   Response<List<Store>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    stores = response.body();
+                    //Log.e("giov",stores.toString());
+                    storesAdapter.notifyDataSetChanged();
+                    if(stores != null)
+                    {
+                        callBack.onStoresDataReceived(stores);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Store>> call, @NonNull Throwable t) {
+                Log.e("failure", "failure: " + t);
+                callBack.onStoresDataFailed(t);
             }
         });
     }
