@@ -8,4 +8,6 @@
     <color name="white1">#f9f9f9</color>
     <color name="grigio">#6b6e70</color>
     <color name="grigio2">#dbdbdb</color>
+    <color name="white_transparent">#80FFFFFF</color>
+
 </resources>
