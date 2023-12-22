@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/category_adapter">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/brand_card"
+        android:id="@+id/category_card"
         android:layout_width="300dp"
         android:layout_height="100dp"
         app:cardCornerRadius="20dp"
@@ -19,14 +20,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/bgProduct"
             android:layout_width="600dp"
             android:layout_height="400dp"
 
             app:srcCompat="@drawable/fruttaeverdura" />
 
         <TextView
-            android:id="@+id/textViewFrutta"
+            android:id="@+id/product_title_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

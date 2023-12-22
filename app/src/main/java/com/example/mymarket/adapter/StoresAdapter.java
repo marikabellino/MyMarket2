@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymarket.AddBrandFragment;
+import com.example.mymarket.CategorieFragment;
 import com.example.mymarket.R;
 import com.example.mymarket.RetrofitInstance;
 import com.example.mymarket.data.StoresList;
@@ -69,21 +70,24 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
         if(allStores){
            holder.updatebtn.setVisibility(View.INVISIBLE);
            holder.deleteBtn.setVisibility(View.INVISIBLE);
-        }
+            holder.card.setEnabled(true);
+        }else {
 
-         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("deleteBtn", " " + store.getId());
-                RetrofitInstance retrofitInstance= new RetrofitInstance();
-                retrofitInstance.deleteStore(store.getId());
+            holder.card.setEnabled(false);
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("deleteBtn", " " + store.getId());
+                    RetrofitInstance retrofitInstance = new RetrofitInstance();
+                    retrofitInstance.deleteStore(store.getId());
 
-                int position = holder.getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    removeItem(position);
+                    int position = holder.getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        removeItem(position);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         holder.updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +100,17 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                 addStoreFragment.setArguments(b);
                 FragmentTransaction ft = fragmentManager.beginTransaction();
                 ft.replace(R.id.fragment_container, addStoreFragment );
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategorieFragment categorieFragment = new CategorieFragment();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.fragment_container, categorieFragment);
                 ft.addToBackStack(null);
                 ft.commit();
             }
@@ -121,6 +136,8 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
         ImageButton updatebtn;
         Button deleteBtn;
 
+        CardView card;
+
         public StoresViewHolder(@NonNull View itemView) {
             super(itemView);
             brandName = itemView.findViewById(R.id.card_title_store);
@@ -130,6 +147,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
             cap = itemView.findViewById(R.id.cap_store);
             deleteBtn = itemView.findViewById(R.id.deletStoreBtn_store);
             updatebtn = itemView.findViewById(R.id.editStoreBtn_store);
+            card = itemView.findViewById(R.id.brand_card_store);
         }
     }
 }
